@@ -1,4 +1,4 @@
-from multiprocessing import Process, process
+from multiprocessing import Process
 
 #Deuxième méthode en définissant une clase
 class Greet(Process):
