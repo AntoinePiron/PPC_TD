@@ -1,15 +1,21 @@
 from multiprocessing import Process
 import sys
+import time
+import os
 
 class Fibonnacci(Process):
     def __init__(self, num):
         super().__init__()
         self.num = num
+        print("Pocess PID :", os.getpid())
+        print("Parent PID :", os.getppid())
+
     def run(self):
         fiblis = [0, 1]
         for i in range(2,self.num+1):
             fiblis.append(fiblis[i-1] + fiblis[i -2])
         print(fiblis)
+        time.sleep(5)
         
 
 if __name__ == "__main__":
