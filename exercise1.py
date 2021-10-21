@@ -1,4 +1,5 @@
 from multiprocessing import Process
+import sys
 
 class Fibonnacci(Process):
     def __init__(self, num):
@@ -12,6 +13,6 @@ class Fibonnacci(Process):
         
 
 if __name__ == "__main__":
-    p = Fibonnacci(5)
+    p = Fibonnacci(int(sys.argv[1]))
     p.start()
     p.join()
