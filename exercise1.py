@@ -5,14 +5,9 @@ class Fibonnacci(Process):
         super().__init__()
         self.num = num
     def run(self):
-        #On initialise les valeurs de base
-        fnm2 = 0
-        fnm1 = 1
-        fiblis = [fnm2, fnm1]
-        for _ in range(self.num-1):
-            fn = fnm1 + fnm2
-            fiblis.append(fn)
-            fnm1, fnm2 = fn, fnm1
+        fiblis = [0, 1]
+        for i in range(2,self.num+1):
+            fiblis.append(fiblis[i-1] + fiblis[i -2])
         print(fiblis)
         
 
