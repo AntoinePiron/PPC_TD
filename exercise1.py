@@ -13,6 +13,14 @@ class Fibonnacci(Process):
         
 
 if __name__ == "__main__":
-    p = Fibonnacci(int(sys.argv[1]))
+    try:
+        argument = int(sys.argv[1])
+        if argument < 0 :
+            raise ValueError
+    except:
+        print("Argument invalide")
+        exit(1)
+
+    p = Fibonnacci(argument)
     p.start()
     p.join()
