@@ -13,14 +13,17 @@ class Fibonnacci(Process):
         
 
 if __name__ == "__main__":
+    #On vient tester si on peut convertir en int et la positivité
     try:
         argument = int(sys.argv[1])
         if argument < 0 :
             raise ValueError
     except:
+        #Si jamais on a relevé une exception on exit simplement le programme
         print("Argument invalide")
         exit(1)
-
+    
+    #Si on se retoruve ici c'est qu'aucune exception n'a été soulevé donc on peut lanceer notre process
     p = Fibonnacci(argument)
     p.start()
     p.join()
