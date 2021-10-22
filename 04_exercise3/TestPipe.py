@@ -15,5 +15,6 @@ if __name__ == "__main__":
     #On créé alors le process child en lui renseignant sa connection au pipe
     p = Test(child_conn)
     p.start()
+    #Avec la méthode recv on recoit ceux qui provient du pipe
     print(parent_conn.recv())
     p.join()
