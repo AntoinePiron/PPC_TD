@@ -8,7 +8,7 @@ class Child(Process):
         super().__init__()
     def run(self):
         time.sleep(5)
-        os.kill(os.getppid, signal.SIGINT)
+        os.kill(os.getppid(), signal.SIGINT)
 
 def handler(sig, frame):
     if sig == signal.SIGINT:
