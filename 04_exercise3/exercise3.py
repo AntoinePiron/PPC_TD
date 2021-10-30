@@ -2,9 +2,11 @@ from multiprocessing import Process, Pipe
 
 #Notre class qui va nous servir pour le processus 
 class Child(Process):
+
     def __init__(self, connection):
         super().__init__()
         self.connection = connection
+        
     def run(self):
         #On créé ici aussi une boucle infinie
         while True:
