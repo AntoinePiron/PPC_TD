@@ -24,9 +24,11 @@ if __name__ == "__main__":
         exit(1)
     
     with Manager() as manager:
+        #On génère notre shared data
         fiblis = manager.list([0,1])
         #Si on se retoruve ici c'est qu'aucune exception n'a été soulevé donc on peut lanceer notre process
         p = Fibonnacci(argument, fiblis)
         p.start()
         p.join()
+        #Si tous se passe bien on print une liste modifié
         print(fiblis)
