@@ -1,4 +1,4 @@
-# TD1 PPC
-*Le 21 octobre 2021*
+# TD PPC
+*Par Antoine Piron*
 
-Il s'agit d'un repo permettant de traquer les changements du premier TD de PPC.
+Il s'agit ici d'un repo qui va contenir tous les TD de PPC
