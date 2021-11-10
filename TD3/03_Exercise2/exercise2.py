@@ -3,15 +3,15 @@ import threading
 from queue import Queue
 from statistics import mean, median, stdev
 
-def worker(queue, data_ready, data):
+def worker(in_queue, out_queue, data_ready, data):
     data_ready.wait()
-    for elem in list(queue.queue):
-        func = queue.get()
-        print(func.__name__, " : ", func(data))
+    for func in list(in_queue.queue):
+        out_queue.put((func.__name__, func(data)))
 
 if __name__ == "__main__":
 
-    queue = Queue()
+    in_queue = Queue()
+    out_queue = Queue()
     data_ready = threading.Event()
 
     data = []
@@ -25,11 +25,14 @@ if __name__ == "__main__":
             print("bad number", s)
         else:
             data.append(x)
-    thread = threading.Thread(target=worker, args=(queue,data_ready, data))
+    thread = threading.Thread(target=worker, args=(in_queue, out_queue,data_ready, data))
     thread.start()
     ops = [min, max, mean, median, stdev]
     for op in ops:
-        queue.put(op)
+        in_queue.put(op)
     data_ready.set()
-
     thread.join()
+
+    for tup in list(out_queue.queue):
+        name, value = tup
+        print(name, ":", value)
