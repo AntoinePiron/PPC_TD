@@ -5,8 +5,7 @@ from random import random
 def generatePoints(n):
     global p_in
     for _ in range(n):
-        x = random()*2 - 1
-        y = random()*2 - 1
+        x, y = random()*2 - 1, random()*2 - 1
         if (pow(x, 2) + pow(y, 2)) <= 1:
             p_in += 1
 
