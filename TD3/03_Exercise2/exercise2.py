@@ -37,7 +37,7 @@ if __name__ == "__main__":
     #Puis on set() pour lancer les opérations dans le thread 
     data_ready.set()
     thread.join()
-    #Un fois le thread finit on boucle sur les résultats 
+    #Un fois le thread finit on boucle sur les résultats
     for tup in list(out_queue.queue):
         name, value = tup
         print(name, ":", value)
