@@ -3,11 +3,8 @@ import multiprocessing
 from multiprocessing import Process
 from random import random
 
-p_in = multiprocessing.Value('i', 0)
-
-def generatePoints(n):
+def generatePoints(n, p_in):
     print("Processse started")
-    global p_in
     for _ in range(n):
         x, y = random()*2 - 1, random()*2 - 1
         if (pow(x, 2) + pow(y, 2)) <= 1:
@@ -23,6 +20,7 @@ if __name__ == "__main__":
     try:
         numberOfPoints = int(sys.argv[1])
         numberOfProcesses = int(sys.argv[2])
+        totalPoints = numberOfPoints*numberOfProcesses
     except ValueError:
         print("Value error in args")
         sys.exit(1)
@@ -31,9 +29,17 @@ if __name__ == "__main__":
         print("Number of points need to be positive")
         sys.exit(1)
 
-    with multiprocessing.Pool(processes=numberOfProcesses) as pool:
-        for i in range(numberOfProcesses):
-            pool.apply_async(generatePoints, (numberOfPoints,))
+    p_in = multiprocessing.Value('i', 0, lock=True)
+    processes = []
+    for i in range(numberOfProcesses):
+        processes.append(Process(target=generatePoints, args=(numberOfPoints,p_in)))
+    
+    for p in processes:
+        p.start()
+    
+    for p in processes:
+        p.join()
 
-    app_pi = 4*(p_in.value/numberOfPoints*numberOfProcesses)
-    print("Approximation of PI:", app_pi)
+    with p_in.get_lock():
+        app_pi = 4*(p_in.value/totalPoints)
+        print("Approximation of PI:", app_pi)
