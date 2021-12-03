@@ -4,7 +4,6 @@ from multiprocessing import Process
 from random import random
 
 def generatePoints(n, p_in):
-    print("Processse started")
     for _ in range(n):
         x, y = random()*2 - 1, random()*2 - 1
         if (pow(x, 2) + pow(y, 2)) <= 1:
@@ -25,7 +24,7 @@ if __name__ == "__main__":
         print("Value error in args")
         sys.exit(1)
 
-    if numberOfPoints < 0 :
+    if numberOfPoints <= 0 or numberOfProcesses <= 0 :
         print("Number of points need to be positive")
         sys.exit(1)
 
